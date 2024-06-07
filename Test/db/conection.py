@@ -13,3 +13,4 @@ except cx_Oracle.DatabaseError as e:
     print(f"Error al conectar a la base de datos: {error.message}")
     exit(1)
 
+#aasd
