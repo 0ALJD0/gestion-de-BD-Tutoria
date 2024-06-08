@@ -7,6 +7,7 @@ class AdminUsuariosRoles:
         try:
             with self.db_manager.connection.cursor() as cursor:
                 # Establecer _ORACLE_SCRIPT en true
+                cursor.execute("ALTER SESSION SET \"_ORACLE_SCRIPT\"=false")
                 cursor.execute("ALTER SESSION SET \"_ORACLE_SCRIPT\"=true")
                 
                 # Crear el usuario
@@ -30,7 +31,9 @@ class AdminUsuariosRoles:
             return
         try:
             with self.db_manager.connection.cursor() as cursor:
-                # Otorgar el privilegio ALTER USER al usuario actual
+               # Establecer _ORACLE_SCRIPT en true
+                cursor.execute("ALTER SESSION SET \"_ORACLE_SCRIPT\"=false")
+                cursor.execute("ALTER SESSION SET \"_ORACLE_SCRIPT\"=true")
                 #cursor.execute("GRANT ALTER USER TO {username}")
                 # Modificar la contraseña del usuario
                 cursor.execute(f"ALTER USER {username} IDENTIFIED BY {new_password}")

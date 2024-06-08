@@ -28,7 +28,10 @@ class AdminRolesPrivilegios:
                     
                     try:
                         with self.db_manager.connection.cursor() as cursor:
-                            cursor.execute(f"GRANT SELECT ANY TABLE TO {nombre_rol}; GRANT INSERT ANY TABLE TO C##{nombre_rol}; GRANT UPDATE ANY TABLE TO {nombre_rol}; GRANT DELETE ANY TABLE TO {nombre_rol};")
+                            cursor.execute(f"GRANT SELECT ANY TABLE TO {nombre_rol}")
+                            cursor.execute(f"GRANT INSERT ANY TABLE TO {nombre_rol}")
+                            cursor.execute(f"GRANT UPDATE ANY TABLE TO {nombre_rol}")
+                            cursor.execute(f"GRANT DELETE ANY TABLE TO {nombre_rol}")
                             self.db_manager.connection.commit()
                             print(f"Privilegio 'lectura y escritura' asignado al rol '{nombre_rol}' correctamente.")
                     except cx_Oracle.DatabaseError as e:
@@ -37,7 +40,7 @@ class AdminRolesPrivilegios:
                 elif opcion1 == "2":
                     try:
                         with self.db_manager.connection.cursor() as cursor:
-                            cursor.execute(f"GRANT SELECT ANY TABLE TO {nombre_rol};")
+                            cursor.execute(f"GRANT SELECT ANY TABLE TO {nombre_rol}")
                             self.db_manager.connection.commit()
                             print(f"Privilegio 'solo lectura' asignado al rol '{nombre_rol}' correctamente.")
                     except cx_Oracle.DatabaseError as e:
@@ -46,7 +49,7 @@ class AdminRolesPrivilegios:
                 elif opcion1 == "3":
                     try:
                         with self.db_manager.connection.cursor() as cursor:
-                            cursor.execute(f"GRANT DROP USER TO {nombre_rol};")
+                            cursor.execute(f"GRANT DROP USER TO {nombre_rol}")
                             self.db_manager.connection.commit()
                             print(f"Privilegio 'eliminar usuarios' asignado al rol '{nombre_rol}' correctamente.")
                     except cx_Oracle.DatabaseError as e:
@@ -55,7 +58,7 @@ class AdminRolesPrivilegios:
                 elif opcion1 == "4":
                     try:
                         with self.db_manager.connection.cursor() as cursor:
-                            cursor.execute(f"GRANT CREATE USER TO {nombre_rol};")
+                            cursor.execute(f"GRANT CREATE USER TO {nombre_rol}")
                             self.db_manager.connection.commit()
                             print(f"Privilegio 'crear usuarios' asignado al rol {nombre_rol}' correctamente.")
                     except cx_Oracle.DatabaseError as e:

@@ -1,5 +1,10 @@
 import subprocess
+#Subprocesses with accessible I/O streams
 
+#This module allows you to spawn processes, connect to their input/output/error pipes, and obtain their return codes.
+
+#For a complete description of this module see the Python documentation.
+#
 class RespaldoRestauracionDB:
     def __init__(self, username, password, sid):
         self.username = username
