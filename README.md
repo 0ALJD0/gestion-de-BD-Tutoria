@@ -1,9 +1,18 @@
-# Gestión de Base de Datos
+# Sistema de Gestión de Base de Datos
 
 ## Autor: Alejandro Arce
 
-Este sistema de gestión de base de datos proporciona una serie de funcionalidades para interactuar con una base de datos Oracle. A continuación se describe la lógica del sistema y sus principales funciones:
+Este sistema de gestión de base de datos proporciona una serie de funcionalidades para interactuar con una base de datos Oracle. A continuación se describe la lógica del sistema y sus principales funciones, así como los detalles técnicos del proyecto:
 
+## Tecnologías Utilizadas
+
+- **Lenguaje de Programación:** Python
+- **Base de Datos:** Oracle
+- **Librerías y Paquetes Utilizados:**
+  - cx_Oracle: Para la conexión con la base de datos Oracle.
+  - PyPDF2: Para la generación de archivos PDF.
+  - tkinter: Para la interfaz gráfica de usuario.
+  
 ## Funcionalidades
 
 ### 1. Generar Consultas
@@ -21,6 +30,10 @@ Proporciona funcionalidades para administrar usuarios y roles en la base de dato
 ### 4. Respaldo y Restauración
 
 Permite al usuario realizar respaldo y restauración de la base de datos. El sistema facilita la realización de copias de seguridad periódicas y la restauración de datos en caso de fallos o pérdidas de información.
+
+### 5. Procedimientos Almacenados
+
+Se han desarrollado procedimientos almacenados (CRUD) para todas las entidades de la base de datos. Estos procedimientos se han implementado en un script SQL que se puede ejecutar desde Oracle Developer para generar automáticamente los procedimientos almacenados.
 
 ## Menús
 
@@ -44,5 +57,5 @@ Permite al usuario realizar respaldo y restauración de la base de datos. El sis
 
 ## Uso del Sistema
 
-Para utilizar el sistema, el usuario puede navegar a través de los diferentes menús utilizando las opciones proporcionadas. Cada menú ofrece una serie de funcionalidades que pueden ser ejecutadas según las necesidades del usuario.
+Para utilizar el sistema, el usuario puede navegar a través de los diferentes menús utilizando las opciones proporcionadas. Cada menú ofrece una serie de funcionalidades que pueden ser ejecutadas según las necesidades del usuario. Además, se incluye un script SQL con procedimientos almacenados para realizar operaciones CRUD en todas las entidades de la base de datos.
 
