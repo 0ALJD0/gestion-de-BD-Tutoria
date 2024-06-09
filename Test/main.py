@@ -20,7 +20,7 @@ def main():
         elif opcion == "2":
             menu_respaldo_restauracion(db_manager)
         elif opcion == "3":
-            menu_generar_reporte(db_manager)
+            menu_generar_reporte()
         elif opcion == "0":
             break
         else:
