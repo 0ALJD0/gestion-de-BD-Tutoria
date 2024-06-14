@@ -11,7 +11,7 @@ def menu_respaldo_restauracion(db_manager):
         opcion = input("Opción: ")
 
         if opcion == "1":
-            ruta_archivo = input("Ingrese la ruta donde guardar el respaldo: ").strip()
+            ruta_archivo = input("Ingrese el nombre del archivo para guardar el respaldo: ").strip()
             respaldo_restauracion.respaldar_base_datos(ruta_archivo)
         elif opcion == "2":
             ruta_archivo = input("Ingrese la ruta del archivo de respaldo: ").strip()
