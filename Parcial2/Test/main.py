@@ -1,9 +1,11 @@
 from db.conexion import ConexionDB
 from interfaces.interfaz_generacion_disparadores import MenuGeneracionDisparadores
+from interfaces.interfaz_cursores_automatizacion import MenuCursoresAutomatizacion
 
 def menu_principal():
     print("Bienvenido al sistema")
     print("1. Generación de disparadores de auditoria")
+    print("2. Cursores y automatización")
     print("0. Salir")
 
 def ejecutar_menu_principal():
@@ -15,6 +17,9 @@ def ejecutar_menu_principal():
             if opcion == '1':
                 menu_disparadores = MenuGeneracionDisparadores(conexion)
                 menu_disparadores.ejecutar()
+            elif opcion == '2':
+                menu_automatizacion = MenuCursoresAutomatizacion(conexion)
+                menu_automatizacion.ejecutar()
             elif opcion == '0':
                 print("Saliendo del sistema...")
                 break
