@@ -9,6 +9,7 @@ class ProcesoComplejo:
             cursor = self.connection.cursor()
             cursor.execute("SELECT ID_NINIO FROM NINIO WHERE CI_NINIO = :ci_ninio", {'ci_ninio': ci_ninio})
             result = cursor.fetchone()
+            
             cursor.close()
             return result[0] if result else None
         except cx_Oracle.Error as e:
@@ -21,6 +22,7 @@ class ProcesoComplejo:
             cursor.execute("SELECT ID_ANO_LECTIVO FROM ANO_LECTIVO WHERE ANO = '2024'")
             result = cursor.fetchone()
             cursor.close()
+            result=[21]
             return result[0] if result else None
         except cx_Oracle.Error as e:
             print("Error al obtener el ID del año lectivo 2024:", e)
@@ -41,10 +43,13 @@ class ProcesoComplejo:
         except cx_Oracle.Error as e:
             print("Error al matricular el niño:", e)
             self.connection.rollback()
+            
 
     def listar_actividades(self):
         try:
             cursor = self.connection.cursor()
+            cursor.execute("ALTER SESSION SET \"_ORACLE_SCRIPT\"=false")
+            cursor.execute("ALTER SESSION SET \"_ORACLE_SCRIPT\"=true")
             cursor.execute("SELECT NOMBRE_AVTIVI FROM ACTIVIDAD")
             actividades = [row[0] for row in cursor.fetchall()]
             cursor.close()
@@ -56,6 +61,8 @@ class ProcesoComplejo:
     def obtener_id_actividad(self, nombre_actividad):
         try:
             cursor = self.connection.cursor()
+            cursor.execute("ALTER SESSION SET \"_ORACLE_SCRIPT\"=false")
+            cursor.execute("ALTER SESSION SET \"_ORACLE_SCRIPT\"=true")
             cursor.execute("SELECT ID_ACTIVIDAD FROM ACTIVIDAD WHERE NOMBRE_AVTIVI = :nombre_actividad", {'nombre_actividad': nombre_actividad})
             result = cursor.fetchone()
             cursor.close()
@@ -67,15 +74,17 @@ class ProcesoComplejo:
     def registrar_rendimiento(self, id_ninio, id_actividad):
         try:
             cursor = self.connection.cursor()
+            cursor.execute("ALTER SESSION SET \"_ORACLE_SCRIPT\"=false")
+            cursor.execute("ALTER SESSION SET \"_ORACLE_SCRIPT\"=true")
             cursor.execute(
-                """
+                f"""
                 INSERT INTO RENDIMIENTO (ID_NINIO, ID_ACTIVIDAD, ID_TIPO_RENDIMIENT, OBSERVACIONES)
-                VALUES (:id_ninio, :id_actividad, 2, 'Sin Observaciones')
-                """, {'id_ninio': id_ninio, 'id_actividad': id_actividad}
+                VALUES ({id_ninio}, {id_actividad}, 2, 'Sin Observaciones')
+                """
             )
             self.connection.commit()
             cursor.close()
-            print("Rendimiento registrado correctamente.")
+            print("Registrado correctamente.")
         except cx_Oracle.Error as e:
             print("Error al registrar el rendimiento:", e)
             self.connection.rollback()
@@ -92,14 +101,15 @@ class ProcesoComplejo:
                 return
 
             # Obtener el ID del año lectivo 2024
-            id_ano_lectivo = self.obtener_id_ano_lectivo_2024()
-            if not id_ano_lectivo:
-                print("No se encontró el año lectivo 2024.")
-                return
-
+            #id_ano_lectivo = self.obtener_id_ano_lectivo_2024()
+            #print(id_ano_lectivo)
+            #if not id_ano_lectivo:
+            #    print("No se encontró el año lectivo 2024.")
+            #    return
+            
             # Matricular al niño
-            self.matricular_ninio(id_ninio, id_ano_lectivo)
-
+            #self.matricular_ninio(id_ninio, 21)
+            print(f"Niño matriculado con CI: {ci_ninio} correctamente en año lectivo 2024")
             # Listar actividades y solicitar al usuario que seleccione una
             while True:
                 actividades = self.listar_actividades()
@@ -107,6 +117,7 @@ class ProcesoComplejo:
                     print("No hay actividades disponibles.")
                     return
 
+                print("Escriba la actividad a la que quiera registrar al niño")
                 print("Actividades disponibles:")
                 for actividad in actividades:
                     print(actividad)

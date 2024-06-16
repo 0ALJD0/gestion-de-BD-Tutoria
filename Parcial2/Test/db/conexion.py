@@ -23,3 +23,9 @@ class ConexionDB:
 
     def get_connection(self):
         return self.connection
+    
+    def get_cursor(self):
+        if self.connection:
+            return self.connection.cursor()
+        else:
+            raise Exception("No hay conexión a la base de datos.")

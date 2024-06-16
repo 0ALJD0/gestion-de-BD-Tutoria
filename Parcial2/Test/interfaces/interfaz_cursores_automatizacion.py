@@ -1,8 +1,8 @@
-from controllers.cursores_automatizacion import CursoresAutomatizacion
+from controllers.cursores_automatizacion import ProcesoComplejo
 
 class MenuCursoresAutomatizacion:
     def __init__(self, conexion):
-        self.automatizacion = CursoresAutomatizacion(conexion)
+        self.automatizacion = ProcesoComplejo(conexion)
 
     def menu_automatizacion(self):
         print("1. Matricular niño y registrar actividad")
@@ -14,7 +14,7 @@ class MenuCursoresAutomatizacion:
             opcion = input("Seleccione una opción: ")
             if opcion == '1':
                 cedula = input("Ingrese la cédula del niño: ")
-                self.automatizacion.matricular_y_registrar_actividad(cedula)
+                self.automatizacion.proceso_complejo(cedula)
             elif opcion == '0':
                 print("Regresando al menú principal...")
                 break
