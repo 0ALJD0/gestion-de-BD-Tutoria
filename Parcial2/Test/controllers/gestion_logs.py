@@ -24,7 +24,7 @@ class GestorLogs:
     def obtener_usuarios(self):
         try:
             cursor = self.conexion.connection.cursor()
-            cursor.execute("SELECT DISTINCT USERNAME FROM DBA_AUDIT_TRAIL")
+            cursor.execute("SELECT DISTINCT OWNER FROM DBA_AUDIT_TRAIL")
             usuarios = [row[0] for row in cursor.fetchall()]
             cursor.close()
             return usuarios
@@ -46,7 +46,7 @@ class GestorLogs:
     def filtrar_logs_por_usuario(self, usuario):
         try:
             cursor = self.conexion.connection.cursor()
-            cursor.execute("SELECT OS_USERNAME AS USUARIO_OS, USERNAME AS USUARIO, TIMESTAMP AS FECHA, ACTION_NAME AS TIPO_ACCION, COMMENT_TEXT AS COMENTARIO FROM DBA_AUDIT_TRAIL WHERE USERNAME = :usuario", usuario=usuario)
+            cursor.execute("SELECT OS_USERNAME AS USUARIO_OS, OWNER AS USUARIO, TIMESTAMP AS FECHA, ACTION_NAME AS TIPO_ACCION, COMMENT_TEXT AS COMENTARIO FROM DBA_AUDIT_TRAIL WHERE OWNER = :usuario", usuario=usuario)
             logs = cursor.fetchall()
             cursor.close()
             return logs
@@ -57,7 +57,7 @@ class GestorLogs:
     def filtrar_logs_por_accion(self, accion):
         try:
             cursor = self.conexion.connection.cursor()
-            cursor.execute("SELECT OS_USERNAME AS USUARIO_OS, USERNAME AS USUARIO, TIMESTAMP AS FECHA, ACTION_NAME AS TIPO_ACCION, COMMENT_TEXT AS COMENTARIO FROM DBA_AUDIT_TRAIL WHERE ACTION_NAME = :accion", accion=accion)
+            cursor.execute("SELECT OS_USERNAME AS USUARIO_OS, OWNER AS USUARIO, TIMESTAMP AS FECHA, ACTION_NAME AS TIPO_ACCION, COMMENT_TEXT AS COMENTARIO FROM DBA_AUDIT_TRAIL WHERE ACTION_NAME = :accion", accion=accion)
             logs = cursor.fetchall()
             cursor.close()
             return logs
@@ -68,7 +68,7 @@ class GestorLogs:
     def filtrar_logs_por_usuario_y_accion(self, usuario, accion):
         try:
             cursor = self.conexion.connection.cursor()
-            cursor.execute("SELECT OS_USERNAME AS USUARIO_OS, USERNAME AS USUARIO, TIMESTAMP AS FECHA, ACTION_NAME AS TIPO_ACCION, COMMENT_TEXT AS COMENTARIO FROM DBA_AUDIT_TRAIL WHERE USERNAME = :usuario AND ACTION_NAME = :accion", usuario=usuario, accion=accion)
+            cursor.execute("SELECT OS_USERNAME AS USUARIO_OS, OWNER AS USUARIO, TIMESTAMP AS FECHA, ACTION_NAME AS TIPO_ACCION, COMMENT_TEXT AS COMENTARIO FROM DBA_AUDIT_TRAIL WHERE OWNER = :usuario AND ACTION_NAME = :accion", usuario=usuario, accion=accion)
             logs = cursor.fetchall()
             cursor.close()
             return logs
