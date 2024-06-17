@@ -98,7 +98,7 @@ class GestorLogs:
         doc = SimpleDocTemplate("informe_logs.pdf", pagesize=letter)
         elements = []
 
-        headers = ["OS_USERNAME", "USERNAME", "TIMESTAMP", "ACTION_NAME", "OBJ_NAME"]
+        headers = ["USUARIO_OS", "USUARIO", "FECHA", "TIPO de ACCIóN", "COMENTARIO"]
         data = [headers] + logs
 
         table = Table(data)
