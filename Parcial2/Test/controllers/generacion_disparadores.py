@@ -93,7 +93,7 @@ class GeneracionDisparadores:
             BEGIN
                 INSERT INTO AUDITORIA (NOMBRE_TABLA_AFECTADA, USUARIO_ACTUAL, FECHA_HORA, DETALLE_ACCION)
                 VALUES ('{entidad}', USER, SYSTIMESTAMP,
-                     'Se eliminó la fila con el ID' || :OLD.ID_{entidad});
+                     'Se eliminó la fila con el ID: ' || :OLD.ID_{entidad});
             END;
             """
             plantilla_disparadores = f"""

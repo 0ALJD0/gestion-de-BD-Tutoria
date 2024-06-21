@@ -101,15 +101,15 @@ class ProcesoComplejo:
                 return
 
             # Obtener el ID del año lectivo 2024
-            #id_ano_lectivo = self.obtener_id_ano_lectivo_2024()
+            id_ano_lectivo = self.obtener_id_ano_lectivo_2024()
             #print(id_ano_lectivo)
-            #if not id_ano_lectivo:
-            #    print("No se encontró el año lectivo 2024.")
-            #    return
+            if not id_ano_lectivo:
+                print("No se encontró el año lectivo 2024.")
+                return
             
             # Matricular al niño
-            #self.matricular_ninio(id_ninio, 21)
-            print(f"Niño matriculado con CI: {ci_ninio} correctamente en año lectivo 2024")
+            self.matricular_ninio(id_ninio, 21)
+           
             # Listar actividades y solicitar al usuario que seleccione una
             while True:
                 actividades = self.listar_actividades()
